@@ -14,10 +14,10 @@ public class MenuActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
-    Button b1 = (Button) findViewById(R.id.button5);
-    Button b2 = (Button) findViewById(R.id.button6);
-    Button b3 = (Button) findViewById(R.id.button7);
-    Button b4 = (Button) findViewById(R.id.button8);
+    Button b1;
+    Button b2;
+    Button b3;
+    Button b4;
 
     String message = null;
 
@@ -26,6 +26,11 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        b1 = (Button) findViewById(R.id.button5);
+        b2 = (Button) findViewById(R.id.button6);
+        b3 = (Button) findViewById(R.id.button7);
+        b4 = (Button) findViewById(R.id.button8);
 
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
