@@ -18,6 +18,9 @@ public class MenuActivity extends AppCompatActivity {
     Button b3;
     Button b4;
     Button list;
+    Button create;
+    Button personal;
+    Button leaderb;
 
     String message = null;
 
@@ -32,15 +35,45 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         list = (Button) findViewById(R.id.button12);
+        create = (Button) findViewById(R.id.create);
         b1 = (Button) findViewById(R.id.button5);
         b2 = (Button) findViewById(R.id.button6);
         b3 = (Button) findViewById(R.id.button7);
         b4 = (Button) findViewById(R.id.button8);
+        personal = (Button) findViewById(R.id.personal);
+        leaderb = (Button) findViewById(R.id.leaderboards);
+
+        leaderb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this,PlayerListActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+        personal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this,QuestionnaireListActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuActivity.this,HistoryActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this,NewQActivity.class);
                 startActivity(i);
 
             }

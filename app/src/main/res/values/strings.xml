@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Endless Quiz</string>
+    <string name="title_questionnaire_list">Questionnaires</string>
+    <string name="title_questionnaire_detail">Questionnaire Detail</string>
+    <string name="title_player_list">Players</string>
+    <string name="title_player_detail">Player Detail</string>
 </resources>
