@@ -53,7 +53,7 @@ public class QuestionActivity extends AppCompatActivity {
     int g_correct;
     ProgressBar timebar;
 
-    CountDownTimer cdTimer = new CountDownTimer(60000, 1000) {
+    CountDownTimer cdTimer = new CountDownTimer(30000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             timer.setText("Time left: " + Long.toString (millisUntilFinished / 1000));
