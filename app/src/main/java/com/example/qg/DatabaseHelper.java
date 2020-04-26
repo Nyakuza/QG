@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+// class for recording, storing and accessing played questions through SQLite
+
 public class DatabaseHelper  extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "Questions_table";

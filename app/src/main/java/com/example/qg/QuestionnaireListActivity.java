@@ -26,14 +26,12 @@ import java.util.List;
 
 import static com.example.qg.content.PersonalContent.createQuizItem;
 
-/**
- * An activity representing a list of Questionnaires. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link QuestionnaireDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
+/** Activity meant to display a list of player created quizzes, for local use and storage, all
+* classes starting with 'questionnaire' and 'PersonalContent' are meant to be part of this module structured a recycler
+* view of player created quizzes, on click leading to detail activity with a recycler view of questions
+ * referring to each one quiz, populated from PersonalContent  and PersonalContendDetal respectively.
+ * Unfortunately I did not manage to finish working on functionality of this part.
+*/
 public class QuestionnaireListActivity extends AppCompatActivity {
 
 

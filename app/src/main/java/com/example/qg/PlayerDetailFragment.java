@@ -14,12 +14,8 @@ import android.widget.TextView;
 
 import com.example.qg.content.LeaderboardContent;
 
-/**
- * A fragment representing a single Player detail screen.
- * This fragment is either contained in a {@link PlayerListActivity}
- * in two-pane mode (on tablets) or a {@link PlayerDetailActivity}
- * on handsets.
- */
+
+
 public class PlayerDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment

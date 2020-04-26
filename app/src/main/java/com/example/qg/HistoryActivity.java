@@ -1,5 +1,7 @@
 package com.example.qg;
 
+//Record/History of games Activity
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
@@ -35,7 +37,7 @@ public class HistoryActivity extends AppCompatActivity {
         Cursor data = dbHelper.getData();
         ArrayList<String> questionList = new ArrayList<>();
         while(data.moveToNext()) {
-            questionList.add(data.getString(2)+" "+data.getString(3));
+            questionList.add("Question: \n  " + data.getString(2)+"\n  Correct Answer: \n  "+data.getString(3));
         }
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, questionList);
         lv.setAdapter(adapter);

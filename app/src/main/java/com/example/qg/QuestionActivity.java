@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 
 import static com.example.qg.MenuActivity.EXTRA_MESSAGE;
 
+// Activity that retrieves questions from the database and displays them with a trivia ui
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -71,19 +72,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         }
     };
-
-       // CountDownTimer timer;
-
-    public class Wrapper //class to transfer outputs from doInBackground to onPostExecute
-    {
-        public Wrapper(List<Result> results, String s) {
-
-        }
-
-        public List<Result> results;
-        public String s;
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

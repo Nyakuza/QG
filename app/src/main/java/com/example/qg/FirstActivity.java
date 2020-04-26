@@ -1,4 +1,5 @@
 package com.example.qg;
+// Trivia Rush // app by Andrey Astashev //
 
 import android.annotation.SuppressLint;
 
@@ -12,10 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+//starting activity
+
 public class FirstActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after

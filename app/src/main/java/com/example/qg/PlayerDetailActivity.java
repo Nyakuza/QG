@@ -16,12 +16,8 @@ import androidx.core.app.NavUtils;
 
 import android.view.MenuItem;
 
-/**
- * An activity representing a single Player detail screen. This
- * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a {@link PlayerListActivity}.
- */
+//
+
 public class PlayerDetailActivity extends AppCompatActivity {
 
     @Override

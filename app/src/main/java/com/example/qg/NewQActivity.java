@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+// Activity for submitting a new question to the database
+
 public class NewQActivity extends AppCompatActivity {
 
     Button submit;

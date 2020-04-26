@@ -19,14 +19,8 @@ import com.example.qg.content.LeaderboardContent;
 
 import java.util.List;
 
-/**
- * An activity representing a list of Players. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link PlayerDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
+// This generates a list of top players, populated from LeaderboardContent
+
 public class PlayerListActivity extends AppCompatActivity {
 
     /**

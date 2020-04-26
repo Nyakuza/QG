@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+// This send the url request to the server and retrieves the response, returning it as a string to the QuestionActivity
+
 public class Retriever {
     static String stream = null;
 

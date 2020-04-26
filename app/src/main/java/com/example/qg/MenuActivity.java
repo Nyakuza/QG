@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+// Trivia Rush selection menu
+
 public class MenuActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.myapp.MESSAGE";
