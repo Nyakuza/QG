@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.qg.conent.LeaderboardContent;
+import com.example.qg.content.LeaderboardContent;
 
 /**
  * A fragment representing a single Player detail screen.

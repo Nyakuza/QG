@@ -1,6 +1,7 @@
 package com.example.qg;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,6 +16,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.core.app.NavUtils;
 
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import static com.example.qg.QuestionnaireListActivity.QID_MESSAGE;
+
 
 /**
  * An activity representing a single Questionnaire detail screen. This
@@ -22,14 +31,29 @@ import android.view.MenuItem;
  * item details are presented side-by-side with a list of items
  * in a {@link QuestionnaireListActivity}.
  */
+
+
+
 public class QuestionnaireDetailActivity extends AppCompatActivity {
+
+    PQDetailDatabaseHelper detaildHelper;
+    ListView detail;
+    int q_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+//        q_id = Integer.parseInt(intent.getStringExtra(QID_MESSAGE));
+        //q_id = 0;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
+
+        detaildHelper = new PQDetailDatabaseHelper(this);
+        detail = (ListView) findViewById(R.id.lv);
+        fillListView();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,5 +108,15 @@ public class QuestionnaireDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fillListView() {
+        Cursor data = detaildHelper.getData(q_id);
+        ArrayList<String> questionList = new ArrayList<>();
+        while(data.moveToNext()) {
+            questionList.add(data.getString(2)+" "+data.getString(3));
+        }
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, questionList);
+        detail.setAdapter(adapter);
     }
 }

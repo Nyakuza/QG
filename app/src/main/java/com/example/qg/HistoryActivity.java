@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     private ListView lv;
+    TextView summary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.listView);
         dbHelper = new DatabaseHelper(this);
+        summary = (TextView) findViewById(R.id.summary);
 
         fillListView();
+        fillSummary();
 
     }
 
@@ -35,5 +39,18 @@ public class HistoryActivity extends AppCompatActivity {
         }
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, questionList);
         lv.setAdapter(adapter);
+    }
+
+    private void fillSummary() {
+        Cursor data = dbHelper.getCount();
+        data.moveToNext();
+        int n = data.getInt(0);
+        data = dbHelper.getCorrect();
+        data.moveToNext();
+        int c = data.getInt(0);
+        double p = (double)(c/n)*100;
+        summary.setText("Correct: " + p + "%     Total: "+n);
+
+
     }
 }

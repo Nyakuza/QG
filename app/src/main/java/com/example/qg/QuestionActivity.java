@@ -1,5 +1,6 @@
 package com.example.qg;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ArgbEvaluator;
@@ -9,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -33,6 +35,7 @@ public class QuestionActivity extends AppCompatActivity {
     TextView tv;
     TextView tv2;
     ImageView iv;
+    TextView timer;
     int cb;
     int points = 0;
     int counter = 1;
@@ -40,6 +43,36 @@ public class QuestionActivity extends AppCompatActivity {
     boolean finished = false;
     DatabaseHelper dbHelper;
 
+    int g_g_id;
+    String g_q;
+    String g_ca;
+    String g_ia1;
+    String g_ia2;
+    String g_ia3;
+    int g_correct;
+    ProgressBar timebar;
+
+    CountDownTimer cdTimer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            timer.setText("Time left: " + Long.toString (millisUntilFinished / 1000));
+           // timebar.setProgress((int)millisUntilFinished / 1000);
+        }
+
+        @Override
+        public void onFinish() {
+            counter++;
+            if (counter >= 20) {
+                finale();
+
+            } else {
+                Question();
+            }
+
+        }
+    };
+
+       // CountDownTimer timer;
 
     public class Wrapper //class to transfer outputs from doInBackground to onPostExecute
     {
@@ -66,23 +99,35 @@ public class QuestionActivity extends AppCompatActivity {
         button3 = (Button)findViewById(R.id.button3);
         button4 = (Button)findViewById(R.id.button4);
         iv = (ImageView)findViewById(R.id.imageView2);
+        timer = (TextView) findViewById(R.id.timer);
         final Animation c = AnimationUtils.loadAnimation(QuestionActivity.this,R.anim.fade);
 
         final ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar);
         pb.setProgress(0);
 
+        //timebar = (ProgressBar)findViewById(R.id.progressBar2);
+        //pb.setProgress(60);
+
         iv.setVisibility(View.INVISIBLE);
 
-
-
         Question();
-        //setContentView(R.layout.activity_main);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent i = new Intent(QuestionActivity.this,MenuActivity.class);
+                startActivity(i);
+            }
+        };
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cdTimer.cancel();
+                g_correct = 0;
                 if (cb == 0) {
                     points++;
+                    g_correct = 1;
                     pb.setProgress(points);
                     iv.setVisibility(View.VISIBLE);
                     iv.startAnimation(c);
@@ -90,6 +135,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                 }
                 counter++;
+                Boolean insertData = dbHelper.addData(g_g_id,g_q,g_ca,g_ia1,g_ia2,g_ia3,g_correct);
                 if (counter >= 20) {
                     finale();
                 } else {
@@ -102,7 +148,10 @@ public class QuestionActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                cdTimer.cancel();
+                g_correct = 0;
                 if (cb == 1) {
+                    g_correct = 1;
                     points++;
                     pb.setProgress(points);
                     iv.setVisibility(View.VISIBLE);
@@ -110,6 +159,7 @@ public class QuestionActivity extends AppCompatActivity {
                     iv.setVisibility(View.INVISIBLE);
                 }
                 counter++;
+                Boolean insertData = dbHelper.addData(g_g_id,g_q,g_ca,g_ia1,g_ia2,g_ia3,g_correct);
                 if (counter >= 20) {
                     finale();
                 } else {
@@ -122,12 +172,16 @@ public class QuestionActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cdTimer.cancel();
+                g_correct = 0;
                 if (cb == 2) {
+                    g_correct = 1;
                     points++;
                     pb.setProgress(points);
 
                 }
                 counter++;
+                Boolean insertData = dbHelper.addData(g_g_id,g_q,g_ca,g_ia1,g_ia2,g_ia3,g_correct);
                 if (counter >= 20) {
                     finale();
                 } else {
@@ -140,11 +194,15 @@ public class QuestionActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cdTimer.cancel();
+                g_correct = 0;
                 if (cb == 3) {
+                    g_correct = 1;
                     points++;
                     pb.setProgress(points);
                 }
                 counter++;
+                Boolean insertData = dbHelper.addData(g_g_id,g_q,g_ca,g_ia1,g_ia2,g_ia3,g_correct);
                 if (counter >= 20) {
                     finale();
 
@@ -158,9 +216,9 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void Question() {
         Animation b = AnimationUtils.loadAnimation(QuestionActivity.this,R.anim.slide2);
-
         tv.startAnimation(b);
         tv.setVisibility(View.INVISIBLE);
+
         @SuppressLint("StaticFieldLeak") AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -180,11 +238,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String stream) {
-                //converting the single string of the response into an object of returned class through Json
-                //Result r = w.results.get(1);
-                //tv.setText(r.getQuestion());
-                //Example re = new Gson().fromJson(w,Example.class); //FUCK IT DOESNT WORK WHY DOES IT RETURN NULLS
-                //tv.setText(re.getResponseCode().toString());
+
                 stream = fixString(stream);
                // questionlist.add(stream);
                 Pattern questionPattern = Pattern.compile("question\":\"(.*?)\"");   // ill just use these instead
@@ -338,7 +392,13 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
                 int temp_placeholder = 0;
-                Boolean insertData = dbHelper.addData(temp_placeholder,q,ca,ia1,ia2,ia3);
+                g_g_id = temp_placeholder;
+                g_q = q;
+                g_ca = ca;
+                g_ia1 = ia1;
+                g_ia2 = ia2;
+                g_ia3 = ia3;
+
 
                 tv.setText(q);
                 button1.setText(ca);
@@ -350,6 +410,9 @@ public class QuestionActivity extends AppCompatActivity {
                 tv.setVisibility(View.VISIBLE);
                 Animation a = AnimationUtils.loadAnimation(QuestionActivity.this,R.anim.slide);
                 tv.startAnimation(a);
+
+                cdTimer.start();
+
 
 
             }
@@ -374,6 +437,8 @@ public class QuestionActivity extends AppCompatActivity {
         finished = true;
 
     }
+
+
 
     public String fixString(String s) {
 

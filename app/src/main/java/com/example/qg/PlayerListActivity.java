@@ -1,7 +1,5 @@
 package com.example.qg;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.qg.conent.LeaderboardContent;
+import com.example.qg.content.LeaderboardContent;
 
 import java.util.List;
 
@@ -78,6 +76,7 @@ public class PlayerListActivity extends AppCompatActivity {
         private final PlayerListActivity mParentActivity;
         private final List<LeaderboardContent.DummyItem> mValues;
         private final boolean mTwoPane;
+        /*
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +98,7 @@ public class PlayerListActivity extends AppCompatActivity {
                 }
             }
         };
-
+*/
         SimpleItemRecyclerViewAdapter(PlayerListActivity parent,
                                       List<LeaderboardContent.DummyItem> items,
                                       boolean twoPane) {
@@ -121,7 +120,7 @@ public class PlayerListActivity extends AppCompatActivity {
             holder.mContentView.setText(mValues.get(position).content);
 
             holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
+            //holder.itemView.setOnClickListener(mOnClickListener);
         }
 
         @Override
